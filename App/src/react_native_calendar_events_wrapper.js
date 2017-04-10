@@ -38,7 +38,10 @@ class ReactNativeCalendarEventsWrapper {
   }
 
   async fetchEvents(startDate, endDate, calendars) {
-    const data = await RNCalendarEvents.fetchAllEvents(startDate, endDate, calendars);
+    var startDateTime = new Date(startDate);
+    var endDateTime = new Date(endDate);
+
+    const data = await RNCalendarEvents.fetchAllEvents( startDateTime.toISOString(), endDateTime.toISOString(), calendars);
     return _.map(data, (event) => ({
       rawData: event,
       title: event.title,
