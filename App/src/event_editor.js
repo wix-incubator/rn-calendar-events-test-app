@@ -106,7 +106,7 @@ export default class EventEditor extends PureComponent {
               placeholder='type event title here'
               defaultValue={this._getField('title')}
               onChangeText={(text) => this._mergeEditedFieldIntoState('title', text)}
-              style={[styles.editableItemData, {textAlignVertical: 'center', textAlign: 'center'}]}
+              style={[styles.editableItemData, {textAlignVertical: 'center', textAlign: 'center', paddingTop:20}]}
               editable={this._isEditMode()}
             />
           </View>
@@ -149,7 +149,7 @@ export default class EventEditor extends PureComponent {
 const styles = StyleSheet.create({
   editableItem: {
     flexDirection: 'row',
-    height: 30
+    height: 50
   },
   editableItemLabel: {
     fontSize: 16,
