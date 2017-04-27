@@ -25,7 +25,7 @@ export default class ModalSelector extends PureComponent {
         <Modal
           animationType="slide"
           visible={this.state.pickerVisible}
-          onRequestClose={this.setState({pickerVisible:false})}
+          onRequestClose={() => this.setState({pickerVisible:false})}
         >
           <RNDates
             startDate={this.state.startDate}
