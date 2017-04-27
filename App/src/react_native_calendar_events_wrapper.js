@@ -48,15 +48,17 @@ class ReactNativeCalendarEventsWrapper {
       startDate: new Date(event.startDate),
       endDate: new Date(event.endDate),
       eventId: event.id,
-      calendarId: event.calendar.id
+      calendarId: event.calendar.id,
+      availability: event.availability,
     }));
   }
 
-  async saveOrUdpateEvent(title, startDate, endDate, calendarId, eventId) {
-    settings = {
+  async saveOrUdpateEvent(title, startDate, endDate, availability, calendarId, eventId) {
+    let settings = {
       startDate: JSON.parse(JSON.stringify(startDate)),
       endDate: JSON.parse(JSON.stringify(endDate)),
-      calendarId: calendarId || undefined
+      availability: availability,
+      calendarId: calendarId || undefined,
     }
     if(eventId) {
       settings.id = eventId;

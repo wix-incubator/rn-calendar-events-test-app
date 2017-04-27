@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   View,
-  Modal,
   FlatList,
   Button,
   ScrollView,
@@ -16,6 +15,8 @@ import ModalSelector from './modal_selector';
 import DatesRange from './dates_range';
 import EventEditor from './event_editor';
 
+const _defaultCalendar = {id: null, title: 'Not selected'};
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ export default class App extends Component {
       authorized: false,
       calendarsList: null,
       calendarsById: null,
-      calendar: {id: null, title: 'Not selected'},
+      calendar: _defaultCalendar,
       calendarPickerVisible: false,
       startDate: new Date(),
       endDate: new Date(),
@@ -56,6 +57,7 @@ export default class App extends Component {
       editedData.title || sourceData.title,
       editedData.startDate || sourceData.startDate,
       editedData.endDate || sourceData.endDate,
+      editedData.availability || sourceData.availability,
       this.state.calendar.id,
       _.get(sourceData, 'eventId')
     )
@@ -78,12 +80,20 @@ export default class App extends Component {
 
         <ModalSelector
           visible={this.state.calendarPickerVisible}
-          data={! this.state.calendarsList ? [] :
-                  _.map(_.range(this.state.calendarsList.length), (i) => ({key: i, title: this.state.calendarsList[i].title}))
-               }
+          data={(() => {
+            let list;
+            if(this.state.calendarsList) {
+              list = _.map(_.range(this.state.calendarsList.length), (i) => ({key: i, title: this.state.calendarsList[i].title}));
+            } else {
+              list = [];
+            }
+            list.unshift({key: 'none', title: '-- None --'});
+            return list;
+          })()}
+          onCancel={() => this.setState({calendarPickerVisible: false})}
           onSelection={(key) => {
             this.setState({
-                calendar: this.state.calendarsList[key],
+                calendar: key !== 'none' ? this.state.calendarsList[key] : _defaultCalendar,
                 calendarPickerVisible: false
               })
           }}
