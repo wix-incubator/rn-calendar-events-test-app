@@ -191,7 +191,7 @@ export default class EventEditor extends PureComponent {
           {this._textRowForField('title')}
           {this._dateRowForField('startDate')}
           {this._dateRowForField('endDate')}
-          {this._selectableTextRowForField('availability', ['free', 'busy', 'tentative'])}
+          {this._selectableTextRowForField('availability', _.get(this.props, 'data.calendarAllowedAvailabilities') || [])}
         </View>
 
         <ScrollView>

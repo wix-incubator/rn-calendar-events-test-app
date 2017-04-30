@@ -118,7 +118,7 @@ export default class App extends Component {
               this._fetchEvents(
                 startTime,
                 endTime,
-                this.state.calendar ? [this.state.calendar.id] : []
+                this.state.calendar.id ? [this.state.calendar.id] : []
               );
             }}
           />

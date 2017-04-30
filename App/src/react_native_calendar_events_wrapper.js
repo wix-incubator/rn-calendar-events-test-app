@@ -50,6 +50,7 @@ class ReactNativeCalendarEventsWrapper {
       eventId: event.id,
       calendarId: event.calendar.id,
       availability: event.availability,
+      calendarAllowedAvailabilities: event.calendar.allowedAvailabilities
     }));
   }
 
